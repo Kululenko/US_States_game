@@ -25,11 +25,13 @@ while game_is_on:
     for state in df["state"].values:
         if answer_state in df["state"].values:
             state_data = df[df["state"] == answer_state]
-            name = state_data["state"]  
+            name = state_data["state"].values[0]  
             x_corr = int(state_data["x"])  
             y_corr = int(state_data["y"])
             state_obj.create_state(x=x_corr,y=y_corr,name=name)  
-            print(f"State: {answer_state}, x: {x_corr}, y: {y_corr}")
+            
+            if name not in guessed_states:
+                guessed_states.append(name)
 
 
 
