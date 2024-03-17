@@ -27,8 +27,8 @@ while len(guessed_states) < 50:
     if answer_state in df["state"].values:
         state_data = df[df["state"] == answer_state]
         name = state_data["state"].values[0]  
-        x_corr = int(state_data["x"])  
-        y_corr = int(state_data["y"])
+        x_corr = int(state_data["x"].iloc[0])  
+        y_corr = int(state_data["y"].iloc[0])
         state_obj.create_state(x=x_corr,y=y_corr,name=name)  
         if name not in guessed_states:
             guessed_states.append(name)
@@ -39,7 +39,7 @@ while len(guessed_states) < 50:
         df2.to_csv("states_to_learn.csv")
         break
         
-        #states_to_learn.csv
+        
 
             
 
