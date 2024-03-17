@@ -16,29 +16,32 @@ df = pandas.read_csv("C:\\Users\\pcmai\\Desktop\\python\\100days\\US_states_game
 
 
 guessed_states = []
-game_is_on = True
+states_to_learn = []
 
-while game_is_on:
-    answer_state = screen.textinput(title=f"{len(guessed_states)}/50 states",prompt="Tell me a state").capitalize()
+
+while len(guessed_states) < 50:
+    answer_state = screen.textinput(title=f"{len(guessed_states)}/50 states",prompt="Tell me a state").title()
     print(answer_state)
 
-    for state in df["state"].values:
-        if answer_state in df["state"].values:
-            state_data = df[df["state"] == answer_state]
-            name = state_data["state"].values[0]  
-            x_corr = int(state_data["x"])  
-            y_corr = int(state_data["y"])
-            state_obj.create_state(x=x_corr,y=y_corr,name=name)  
+    
+    if answer_state in df["state"].values:
+        state_data = df[df["state"] == answer_state]
+        name = state_data["state"].values[0]  
+        x_corr = int(state_data["x"])  
+        y_corr = int(state_data["y"])
+        state_obj.create_state(x=x_corr,y=y_corr,name=name)  
+        if name not in guessed_states:
+            guessed_states.append(name)
+
+    elif answer_state == "Exit":
+        states_to_learn.extend(state for state in df["state"].values if state not in guessed_states)
+        df2 = pandas.DataFrame(states_to_learn)
+        df2.to_csv("states_to_learn.csv")
+        break
+        
+        #states_to_learn.csv
+
             
-            if name not in guessed_states:
-                guessed_states.append(name)
 
 
 
-            
-
-
-
-
-
-screen.exitonclick()
