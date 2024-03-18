@@ -23,7 +23,7 @@ while len(guessed_states) < 50:
     answer_state = screen.textinput(title=f"{len(guessed_states)}/50 states",prompt="Tell me a state").title()
     print(answer_state)
 
-    
+    #checks for state and write it down
     if answer_state in df["state"].values:
         state_data = df[df["state"] == answer_state]
         name = state_data["state"].values[0]  
