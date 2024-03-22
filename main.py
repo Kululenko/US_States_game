@@ -18,7 +18,7 @@ df = pandas.read_csv("C:\\Users\\pcmai\\Desktop\\python\\100days\\US_states_game
 guessed_states = []
 states_to_learn = []
 
-
+#while not guessed every state
 while len(guessed_states) < 50:
     answer_state = screen.textinput(title=f"{len(guessed_states)}/50 states",prompt="Tell me a state").title()
     print(answer_state)
@@ -33,6 +33,7 @@ while len(guessed_states) < 50:
         if name not in guessed_states:
             guessed_states.append(name)
 
+    #exit strategy
     elif answer_state == "Exit":
         states_to_learn.extend(state for state in df["state"].values if state not in guessed_states)
         df2 = pandas.DataFrame(states_to_learn)
